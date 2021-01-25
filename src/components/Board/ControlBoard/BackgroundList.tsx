@@ -23,11 +23,11 @@ const BackgroundList: React.FC = () => {
   }, [backgrounds]);
 
   const prev = () => {
-    setPoint(Math.max(0, point-1));
+    setPoint(Math.max(0, point - 1));
   };
 
   const next = () => {
-    setPoint(Math.min(point+1, range));
+    setPoint(Math.min(point + 1, range));
   };
 
   const handleBackgroundChange = (bg: Background) => {
@@ -65,19 +65,18 @@ const BackgroundList: React.FC = () => {
       </div>
       {/* Image */}
       <div className="flex">
-        {[0,1].map(index =>
+        {[0, 1].map(index =>
           <div className="w-1/2 cursor-pointer" key={index}>
             {backgrounds[point + index] && background &&
               <div
-                onClick={() => handleBackgroundChange(backgrounds[point+index])}
-                className={background.key === backgrounds[point+index].key ? 'p-1 border border-gray-300' : 'p-1 border border-transparent hover:border-gray-500 active:border-gray-400'}
+                onClick={() => handleBackgroundChange(backgrounds[point + index])}
+                className={background.key === backgrounds[point + index].key ? 'p-1 border border-gray-300' : 'p-1 border border-transparent hover:border-gray-500 active:border-gray-400'}
               >
                 <div className="relative" style={styles.image}>
                   <img
                     src={backgrounds[point + index].thumb}
                     alt=""
                     className="rounded-sm overflow-hidden absolute w-full h-full object-cover top-0 left-0"
-                    draggable
                   />
                 </div>
               </div>

@@ -11,13 +11,14 @@ const ImageList: React.FC = () => {
   const [category, setCategory] = React.useState<Category | null>(null);
   const [categoryImages, setCategoryImages] = React.useState<Image[]>([]);
 
-  const dragStart = (event:any, image:Image) => {
+  const dragStart = (event: any, image: Image) => {
     const imageSize = event.target.childNodes[0].getBoundingClientRect();
     const imageOffset = event.target.childNodes[0].getBoundingClientRect();
     setState({
       ...state,
       dragItem: {
-        image,
+        type: 'image',
+        object: image,
         offsetX: event.clientX - imageOffset.left,
         offsetY: event.clientY - imageOffset.top,
         width: imageSize.width,
@@ -30,7 +31,8 @@ const ImageList: React.FC = () => {
     setState({
       ...state,
       dragItem: {
-        image: null,
+        type: null,
+        object: null,
         offsetX: 0,
         offsetY: 0,
         width: 0,
@@ -44,7 +46,7 @@ const ImageList: React.FC = () => {
   };
 
   React.useEffect(() => {
-    const filtered = images.filter((img:Image) => img.cat === category?.name);
+    const filtered = images.filter((img: Image) => img.cat === category?.name);
     setCategoryImages(filtered);
   }, [category, images]);
 
@@ -66,13 +68,13 @@ const ImageList: React.FC = () => {
       {/* Categories */}
       {category === null &&
         <div className="flex flex-wrap">
-          {categories.map((cat:Category) =>
+          {categories.map((cat: Category) =>
             <div
               key={cat.name}
               onClick={() => setCategory(cat)}
               className="w-1/3 h-16 p-2 flex items-center justify-center border border-transparent hover:border-gray-500 active:border-gray-300 cursor-pointer rounded-sm"
             >
-              <img src={cat.image} alt="" className="max-w-full max-h-full"/>
+              <img src={cat.image} alt="" className="max-w-full max-h-full" />
             </div>
           )}
         </div>
@@ -89,7 +91,7 @@ const ImageList: React.FC = () => {
               onDragEnd={dragEnd}
               className="w-1/3 h-16 p-2 flex items-center justify-center border border-transparent hover:border-gray-500 active:border-gray-300 cursor-pointer rounded-sm"
             >
-              <img src={img.image} alt="" className="max-w-full max-h-full pointer-events-none"/>
+              <img src={img.image} alt="" className="max-w-full max-h-full pointer-events-none" />
             </div>
           )}
         </div>

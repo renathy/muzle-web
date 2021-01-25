@@ -39,26 +39,36 @@ const CanvasBoard: React.FC = () => {
   }, [canvas, width, height, background]);
 
   const handleDrop = (event: any) => {
-    if (canvas) {
+    if (canvas && dragItem.type) {
       const canvasOffset = event.target.getBoundingClientRect();
       var x = event.clientX - (canvasOffset.left + dragItem.offsetX);
       var y = event.clientY - (canvasOffset.top + dragItem.offsetY);
-      
-      fabric.Image.fromURL(dragItem.image.image, function(img) {
-        if (img.width) {
-          const scale = dragItem.width / img.width;
-          img.set({
-            left: x,
-            top: y,
-            scaleX: scale,
-            scaleY: scale,
-          });
-          canvas.add(img).renderAll.bind(canvas); 
-        }
-      });
+
+      if (dragItem.type === 'image') {
+        fabric.Image.fromURL(dragItem.object.image, function (img) {
+          if (img.width) {
+            const scale = dragItem.width / img.width;
+            img.set({
+              left: x,
+              top: y,
+              scaleX: scale,
+              scaleY: scale,
+            });
+            canvas.add(img).renderAll.bind(canvas);
+          }
+        });
+      }
+
+      if (dragItem.type === 'line') {
+
+      }
+
+      if (dragItem.type === 'circle') {
+
+      }
     }
   };
-  
+
   return (
     <div onDrop={event => handleDrop(event)}>
       <canvas id="canvas"></canvas>
