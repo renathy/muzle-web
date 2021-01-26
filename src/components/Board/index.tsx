@@ -17,12 +17,18 @@ interface Props {
 const Board: React.FC<Props> = ({ data }) => {
   const { state, setState } = React.useContext(Context);
 
-  React.useEffect(() => {
+  const setBackground = React.useCallback(() => {
+    console.log('background');
     setState({
       ...state,
       background: data.backgrounds[0],
     });
-  }, [data]);
+  }, [data, state, setState]);
+
+  React.useEffect(() => {
+    console.log('background');
+    setBackground();
+  }, [setBackground]);
 
   return (
     <ContextProvider>
