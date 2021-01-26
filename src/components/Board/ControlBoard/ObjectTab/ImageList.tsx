@@ -1,7 +1,7 @@
 import React from "react";
 import { BsList } from "react-icons/bs";
-import { Category, Image } from "../Constant";
-import { Context } from "../ContextProvider";
+import { Category, Image } from "../../Constant";
+import { Context } from "../../ContextProvider";
 
 const ImageList: React.FC = () => {
 

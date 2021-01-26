@@ -26,6 +26,10 @@ const data = {
       image: '/img/cat/categories/bird.png',
     },
     {
+      name: 'birdbabies',
+      image: '/img/cat/categories/bird.png',
+    },
+    {
       name: 'plants',
       image: '/img/cat/categories/plant.png',
     },
@@ -78,6 +82,8 @@ const data = {
     { cat: 'birds', name: 'vanags', image: '/img/cat/birds/vanags.png' },
     { cat: 'birds', name: 'varna', image: '/img/cat/birds/varna.png' },
     { cat: 'birds', name: 'zagata', image: '/img/cat/birds/zagata.png' },
+    { cat: 'birdbabies', name: 'puculens', image: '/img/cat/birdbabies/puculens.png' },
+    { cat: 'birdbabies', name: 'dzenis', image: '/img/cat/birdbabies/upens.png' },
     { cat: 'plants', name: 'baravika', image: '/img/cat/plants/baravika.png' },
     { cat: 'plants', name: 'berza_lapa', image: '/img/cat/plants/berza_lapa.png' },
     { cat: 'plants', name: 'berza_skara', image: '/img/cat/plants/berza_skara.png' },

@@ -1,7 +1,7 @@
 import React from "react";
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import { Background } from "../Constant";
-import { Context } from "../ContextProvider";
+import { Background } from "../../Constant";
+import { Context } from "../../ContextProvider";
 
 const styles = {
   image: {

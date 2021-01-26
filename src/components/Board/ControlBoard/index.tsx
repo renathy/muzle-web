@@ -3,8 +3,7 @@ import { Context } from "../ContextProvider";
 import { Nav } from "../Constant";
 import Navigation from "./Navigation";
 import ControlTab from "./ControlTab";
-import BackgroundList from "./BackgroundList";
-import ImageList from "./ImageList";
+import ObjectTab from "./ObjectTab";
 
 const Board: React.FC = () => {
 
@@ -18,10 +17,7 @@ const Board: React.FC = () => {
       </div>
       <div className="p-2 space-y-4">
         {nav === Nav.Image &&
-          <React.Fragment>
-            <BackgroundList />
-            <ImageList />
-          </React.Fragment>
+          <ObjectTab />
         }
         {nav === Nav.Control &&
           <ControlTab />
