@@ -1,6 +1,7 @@
 import React from "react";
-import { Background, Nav, GameData } from "./Constant";
+import { fabric } from "fabric";
 import data from "data";
+import { Background, Nav, GameData } from "./Constant";
 
 export interface BoardState {
   canvas: fabric.Canvas | null;
@@ -10,20 +11,20 @@ export interface BoardState {
   width: number;
   height: number;
   data: GameData;
-};
+  showHelper: Boolean;
+}
 
 export interface BoardContext {
   state: any;
-  setState(state:any): void;
-};
+  setState(state: any): void;
+}
 
 export const Context = React.createContext<BoardContext>({
   state: null,
-  setState: () => {}
+  setState: () => { },
 });
 
-const ContextProvider: React.FC<any> = ({ children }) => {
-
+const ContextProvider: React.FC<any> = ({ children }: any) => {
   const [state, setState] = React.useState<BoardState>({
     canvas: null,
     nav: Nav.Image,
@@ -31,13 +32,12 @@ const ContextProvider: React.FC<any> = ({ children }) => {
     dragItem: {},
     width: 800,
     height: 600,
-    data
+    data,
+    showHelper: false
   });
 
   return (
-    <Context.Provider value={{ state, setState }}>
-      {children}
-    </Context.Provider>
+    <Context.Provider value={{ state, setState }}>{children}</Context.Provider>
   );
 };
 

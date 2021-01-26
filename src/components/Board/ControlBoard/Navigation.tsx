@@ -1,35 +1,49 @@
 import React from "react";
-import { BiImageAdd } from "react-icons/bi";
-import { FaCogs } from "react-icons/fa";
+import { BiImageAdd, BiText } from "react-icons/bi";
+import { FaCogs, FaShapes } from "react-icons/fa";
 import { Context } from "../ContextProvider";
 import { Nav } from "../Constant";
 
 const navOptions = [
   {
     name: Nav.Image,
-    Icon: BiImageAdd
+    Icon: BiImageAdd,
+  },
+  {
+    name: Nav.Shape,
+    Icon: FaShapes,
+  },
+  {
+    name: Nav.Text,
+    Icon: BiText
   },
   {
     name: Nav.Control,
-    Icon: FaCogs
-  },
+    Icon: FaCogs,
+  }
 ];
 
 const Navigation: React.FC = () => {
-
-  const {state, setState} = React.useContext(Context);
+  const { state, setState } = React.useContext(Context);
 
   const handleChange = (name: Nav) => {
     setState({
       ...state,
-      nav: name
+      nav: name,
     });
   };
 
   return (
     <div className="flex">
-      {navOptions.map(({name, Icon}) =>
-        <div className={name === state.nav ? 'bg-gray-800' : 'text-gray-500 hover:text-gray-300'} key={name}>
+      {navOptions.map(({ name, Icon }) => (
+        <div
+          className={
+            name === state.nav
+              ? "bg-gray-800"
+              : "text-gray-500 hover:text-gray-300"
+          }
+          key={name}
+        >
           <div
             onClick={() => handleChange(name)}
             className="w-12 h-12 flex items-center justify-center text-2xl cursor-pointer"
@@ -37,9 +51,9 @@ const Navigation: React.FC = () => {
             <Icon />
           </div>
         </div>
-      )}
+      ))}
     </div>
   );
-}
+};
 
 export default Navigation;

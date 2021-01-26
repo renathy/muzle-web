@@ -6,23 +6,22 @@ import ControlBoard from "./ControlBoard";
 import CustomScroll from "./CustomScroll";
 
 const styles = {
-  board: { width: 800, height: 600},
-  control: {width: 250, height: 600}
+  board: { width: 800, height: 600 },
+  control: { width: 250, height: 600 },
 };
 
 interface Props {
-  data: GameData
-};
+  data: GameData;
+}
 
 const Board: React.FC<Props> = ({ data }) => {
-
   const { state, setState } = React.useContext(Context);
 
   React.useEffect(() => {
     setState({
       ...state,
-      background: data.backgrounds[0]
-    })
+      background: data.backgrounds[0],
+    });
   }, [data]);
 
   return (
@@ -33,7 +32,10 @@ const Board: React.FC<Props> = ({ data }) => {
             <div style={styles.board} className="flex-shrink-0 bg-gray-200">
               <CanvasBoard />
             </div>
-            <div style={styles.control} className="flex-shrink-0 bg-gray-900 text-gray-100">
+            <div
+              style={styles.control}
+              className="flex-shrink-0 bg-gray-900 text-gray-100"
+            >
               <CustomScroll style={styles.control}>
                 <ControlBoard />
               </CustomScroll>
@@ -43,6 +45,6 @@ const Board: React.FC<Props> = ({ data }) => {
       </div>
     </ContextProvider>
   );
-}
+};
 
 export default Board;

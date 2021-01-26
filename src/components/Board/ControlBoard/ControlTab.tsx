@@ -3,10 +3,10 @@ import { AiOutlineDownload } from "react-icons/ai";
 import { FaTrash } from "react-icons/fa";
 import { Context } from "../ContextProvider";
 
-const buttonClass = "w-12 h-12 m-1 flex items-center justify-center text-xl focus:outline-none border border-gray-700 hover:border-gray-300 active:border-gray-500";
+const buttonClass =
+  "w-12 h-12 m-1 flex items-center justify-center text-xl focus:outline-none border border-gray-700 hover:border-gray-300 active:border-gray-500";
 
 const ControlTab: React.FC = () => {
-
   const { state } = React.useContext(Context);
   const { canvas, width, height } = state;
 
@@ -18,30 +18,30 @@ const ControlTab: React.FC = () => {
 
   const handleDownload = () => {
     const url = canvas.toDataURL({
-      format: 'png',
+      format: "png",
       width,
-      height
+      height,
     });
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = 'download';
+    a.download = "download";
     const clickHandler = () => {
       setTimeout(() => {
         URL.revokeObjectURL(url);
-        a.removeEventListener('click', clickHandler);
+        a.removeEventListener("click", clickHandler);
         a.remove();
       }, 150);
     };
-    a.addEventListener('click', clickHandler, false);
+    a.addEventListener("click", clickHandler, false);
     a.click();
   };
 
   return (
     <div className="flex flex-wrap">
-      <button onClick={handleDownload} className={buttonClass}>
+      <button type="button" onClick={handleDownload} className={buttonClass}>
         <AiOutlineDownload />
       </button>
-      <button onClick={handleDelete} className={buttonClass}>
+      <button type="button" onClick={handleDelete} className={buttonClass}>
         <FaTrash />
       </button>
     </div>
