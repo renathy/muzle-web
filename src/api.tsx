@@ -13,10 +13,10 @@ const api = axios.create({
 api.interceptors.response.use(
   response => response,
   error => {
-    if (error.response && error.response.status === 403) {
+    if (error.response && error.response.status === 401 && error.response.config.url !== '/auth/me') {
       window.location.href = '/login';
     }
-    return false;
+    return error.response;
   });
 
 export default api;

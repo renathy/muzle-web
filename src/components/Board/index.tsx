@@ -18,7 +18,6 @@ const Board: React.FC<Props> = ({ data }) => {
   const { state, setState } = React.useContext(Context);
 
   const setBackground = React.useCallback(() => {
-    console.log('background');
     setState({
       ...state,
       background: data.backgrounds[0],
@@ -26,7 +25,6 @@ const Board: React.FC<Props> = ({ data }) => {
   }, [data, state, setState]);
 
   React.useEffect(() => {
-    console.log('background');
     setBackground();
   }, [setBackground]);
 

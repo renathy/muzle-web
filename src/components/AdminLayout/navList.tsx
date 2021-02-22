@@ -1,5 +1,5 @@
 import { IconType } from 'react-icons';
-import { GiHerbsBundle } from 'react-icons/gi';
+import { MdDashboard } from 'react-icons/md';
 import { FaSchool } from 'react-icons/fa';
 import { FiUsers } from 'react-icons/fi';
 import { BiGame } from 'react-icons/bi';
@@ -16,8 +16,8 @@ interface Nav {
 const navList: Nav[] = [
   {
     path: '/admin',
-    title: 'Welcome',
-    Icon: GiHerbsBundle,
+    title: 'Dashboard',
+    Icon: MdDashboard,
   },
   {
     path: '/admin/tenants',

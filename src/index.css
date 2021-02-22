@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.shadow1 {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.formInput {
+  @apply block text-sm;
+}
+
+.formInputText {
+  @apply mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0
+}
+
+.formSubmit {
+  @apply block px-4 py-2 mt-4 text-sm text-center text-white rounded-md cursor-pointer bg-purple-600 active:bg-purple-700 focus:outline-none
+}

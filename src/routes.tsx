@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import Login from 'pages/auth/Login';
-import AdminWelcome from 'pages/admin/Welcome';
+import AdminDashboard from 'pages/admin/Dashboard';
 import AdminTenants from 'pages/admin/Tenants';
 import AdminUsers from 'pages/admin/Users';
 import AdminGames from 'pages/admin/Games';
@@ -25,9 +25,9 @@ const routes: Route[] = [
   },
   {
     path: '/admin',
-    title: 'Welcome',
+    title: 'Dashboard',
     scope: 'admin',
-    component: AdminWelcome,
+    component: AdminDashboard,
   },
   {
     path: '/admin/tenants',
