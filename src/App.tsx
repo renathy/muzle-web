@@ -1,39 +1,64 @@
 import React from "react";
-import Board from "components/Board";
-import data from "./data";
+import { Switch, Route, matchPath, useLocation, useHistory } from 'react-router-dom';
+import authAtom from "atoms/auth";
+import { useRecoilState } from "recoil";
+import api from "api";
+import routes from "./routes";
+import NoMatch from "pages/public/NoMatch";
 
 const App: React.FC = () => {
+
+  const location = useLocation();
+  const history = useHistory();
+  const [authState, setAuthState] = useRecoilState(authAtom);
+
+  React.useEffect(() => {
+    if (!authState.init) {
+      const checkToken = async () => {
+        const response = await api.post('/auth/me');
+        const user = response.status === 200 ? response.data : null;
+
+        // verify url scope
+        for (let i = 0; i < routes.length; i++) {
+          if (matchPath(location.pathname, routes[i])) {
+            if (routes[i].scope !== user.role) {
+              if (user.role === 'admin') {
+                history.push("/admin");
+              } else {
+                history.push("/user");
+              }
+            }
+            break;
+          }
+        }
+
+        // set login status
+        setTimeout(() => {
+          setAuthState({
+            init: true,
+            user,
+          });
+        }, 1000);
+      };
+      checkToken();
+    }
+  }, [authState, setAuthState, history, location]);
+
   return (
-    <div className="w-screen h-screen flex flex-col">
-      <nav className="bg-gray-800">
-        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-          <div className="relative flex items-center justify-between h-16">
-            <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-              <div className="flex-shrink-0 flex items-center">
-                <img className="block h-8 w-20" src="logo.png" alt="Muzle" />
-              </div>
-            </div>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <div className="ml-3 relative">
-                <button
-                  type="button"
-                  className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                  id="user-menu"
-                  aria-haspopup="true"
-                >
-                  <img className="h-8 w-8 rounded-full" src="user.png" alt="" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-      {/* <header className="flex-shrink-0 h-16 bg-gray-900 text-white flex items-center px-8">
-        <h1 className="text-xl">Playground for Children</h1>
-      </header> */}
-      <main className="flex-grow overflow-auto">
-        <Board data={data} />
-      </main>
+    <div>
+      {authState.init ?
+        <Switch>
+          {routes.map(route =>
+            <Route path={route.path} exact key={route.path}>
+              <route.component />
+            </Route>
+          )}
+          <Route path="*">
+            <NoMatch />
+          </Route>
+        </Switch>
+        : <div className="w-screen h-screen flex justify-center items-center">loading...</div>
+      }
     </div>
   );
 };
