@@ -1,12 +1,12 @@
 import React from "react";
 import AdminLayout from "components/AdminLayout";
 
-const AdminWelcome: React.FC = () => {
+const AdminGames: React.FC = () => {
   return (
     <AdminLayout>
-      <div>Welcome</div>
+      <div>Games</div>
     </AdminLayout>
   );
 };
 
-export default AdminWelcome;
+export default AdminGames;

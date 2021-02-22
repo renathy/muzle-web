@@ -1,12 +1,12 @@
 import React from "react";
 import AdminLayout from "components/AdminLayout";
 
-const AdminWelcome: React.FC = () => {
+const AdminImages: React.FC = () => {
   return (
     <AdminLayout>
-      <div>Welcome</div>
+      <div>Images</div>
     </AdminLayout>
   );
 };
 
-export default AdminWelcome;
+export default AdminImages;

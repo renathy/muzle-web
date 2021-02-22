@@ -16,29 +16,41 @@ const App: React.FC = () => {
     if (!authState.init) {
       const checkToken = async () => {
         const response = await api.post('/auth/me');
-        const user = response.status === 200 ? response.data : null;
 
-        // verify url scope
-        for (let i = 0; i < routes.length; i++) {
-          if (matchPath(location.pathname, routes[i])) {
-            if (routes[i].scope !== user.role) {
-              if (user.role === 'admin') {
-                history.push("/admin");
-              } else {
-                history.push("/user");
-              }
+        if (response.status === 200) {
+          const user = response.data;
+
+          // verify url scope
+          let routeScope = '';
+          for (let i = 0; i < routes.length; i++) {
+            if (matchPath(location.pathname, routes[i])) {
+              routeScope = routes[i].scope;
+              break;
             }
-            break;
           }
+          if (routeScope !== user.role) {
+            if (user.role === 'admin') {
+              history.push("/admin");
+            } else {
+              history.push("/user");
+            }
+          }
+
+          // set login status
+          setTimeout(() => {
+            setAuthState({
+              init: true,
+              user,
+            });
+          }, 1000);
+        } else {
+          setAuthState({
+            ...authState,
+            init: true,
+          });
+          history.push("/login");
         }
 
-        // set login status
-        setTimeout(() => {
-          setAuthState({
-            init: true,
-            user,
-          });
-        }, 1000);
       };
       checkToken();
     }

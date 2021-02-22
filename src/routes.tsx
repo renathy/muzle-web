@@ -1,6 +1,12 @@
 import { FunctionComponent } from 'react';
 import Login from 'pages/auth/Login';
 import AdminWelcome from 'pages/admin/Welcome';
+import AdminTenants from 'pages/admin/Tenants';
+import AdminUsers from 'pages/admin/Users';
+import AdminGames from 'pages/admin/Games';
+import AdminCategories from 'pages/admin/Categories';
+import AdminImages from 'pages/admin/Images';
+import AdminBackgrounds from 'pages/admin/Backgrounds';
 import UserWelcome from 'pages/user/Welcome';
 
 interface Route {
@@ -22,6 +28,42 @@ const routes: Route[] = [
     title: 'Welcome',
     scope: 'admin',
     component: AdminWelcome,
+  },
+  {
+    path: '/admin/tenants',
+    title: 'Tenants',
+    scope: 'admin',
+    component: AdminTenants,
+  },
+  {
+    path: '/admin/users',
+    title: 'Users',
+    scope: 'admin',
+    component: AdminUsers,
+  },
+  {
+    path: '/admin/games',
+    title: 'Games',
+    scope: 'admin',
+    component: AdminGames,
+  },
+  {
+    path: '/admin/categories',
+    title: 'Categories',
+    scope: 'admin',
+    component: AdminCategories,
+  },
+  {
+    path: '/admin/images',
+    title: 'Images',
+    scope: 'admin',
+    component: AdminImages,
+  },
+  {
+    path: '/admin/backgrounds',
+    title: 'Backgrounds',
+    scope: 'admin',
+    component: AdminBackgrounds,
   },
   {
     path: '/user',
