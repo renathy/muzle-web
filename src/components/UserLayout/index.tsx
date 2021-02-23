@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
+import navList from "./navList";
 import UserMenu from "./UserMenu";
 
 const UserLayout: React.FC = ({ children }) => {
@@ -24,6 +25,14 @@ const UserLayout: React.FC = ({ children }) => {
             <Link to="/user">
               <img className="h-8" src="/logo.png" alt="" />
             </Link>
+            {/* navs */}
+            <div className="pl-8 space-x-2 h-full flex">
+              {navList.map(nav =>
+                <Link className="h-full px-2 flex items-center hover:bg-purple-700 active:bg-purple-800" to={nav.path} key={nav.title}>
+                  {nav.title}
+                </Link>
+              )}
+            </div>
             {/* space */}
             <div className="flex-grow"></div>
             {/* user menu */}
