@@ -9,12 +9,7 @@ const AdminUsers: React.FC = () => {
 
   const [userState, setUserState] = useRecoilState(userAtom);
   const [tenantState, setTenantState] = useRecoilState(tenantAtom);
-
-  const nameRef = React.useRef<HTMLInputElement>(null);
-  const nicknameRef = React.useRef<HTMLInputElement>(null);
-  const roleRef = React.useRef<HTMLSelectElement>(null);
-  const passwordRef = React.useRef<HTMLInputElement>(null);
-  const tenantRef = React.useRef<HTMLSelectElement>(null);
+  const formRef = React.useRef<HTMLFormElement>(null);
   const [waiting, setWating] = React.useState(false);
   const [submitStatus, setSubmitStatus] = React.useState({
     code: '',
@@ -24,7 +19,7 @@ const AdminUsers: React.FC = () => {
   React.useEffect(() => {
     if (!userState.init) {
       const load = async () => {
-        const response = await api.get('/admin/users');
+        const response = await api.get('api/admin/users');
         if (response.status === 200) {
           setUserState({
             init: true,
@@ -38,42 +33,41 @@ const AdminUsers: React.FC = () => {
       };
       load();
     }
-  }, []);
+  }, [userState, setUserState, setTenantState]);
 
   const submit = async () => {
-    console.log(roleRef.current?.value);
-    setWating(true);
-    setSubmitStatus({
-      code: '',
-      messages: []
-    });
-    const response = await api.post('/admin/users', {
-      name: nameRef.current?.value,
-      nickname: nicknameRef.current?.value,
-      role: roleRef.current?.value,
-      password: passwordRef.current?.value,
-      tenant_id: tenantRef.current?.value,
-    });
+    if (formRef.current) {
+      setWating(true);
+      setSubmitStatus({
+        code: '',
+        messages: []
+      });
 
-    if (response.status === 200) {
-      setUserState({
-        ...userState,
-        users: [
-          ...userState.users,
-          response.data.user
-        ]
-      });
-      setSubmitStatus({
-        code: 'success',
-        messages: ['Successfully created!']
-      });
-    } else {
-      setSubmitStatus({
-        code: 'failed',
-        messages: Object.values(response.data.errors)
-      });
+      var data = new FormData(formRef.current);
+      const response = await api.post('api/admin/users', data);
+
+      if (response.status === 200) {
+        setUserState({
+          ...userState,
+          users: [
+            ...userState.users,
+            response.data.user
+          ]
+        });
+        setSubmitStatus({
+          code: 'success',
+          messages: ['Successfully created!']
+        });
+
+        formRef.current.reset();
+      } else {
+        setSubmitStatus({
+          code: 'failed',
+          messages: Object.values(response.data.errors)
+        });
+      }
+      setWating(false);
     }
-    setWating(false);
   };
 
   return (
@@ -117,7 +111,7 @@ const AdminUsers: React.FC = () => {
           </div>
 
           {/* form */}
-          <div className="bg-white rounded-sm p-4 space-y-4 shadow1">
+          <form className="bg-white rounded-sm p-4 space-y-4 shadow1" ref={formRef}>
             {submitStatus.code === 'success' &&
               <div className="px-4 py-2 text-sm text-white bg-green-600 rounded-md">
                 {submitStatus.messages[0]}
@@ -132,26 +126,26 @@ const AdminUsers: React.FC = () => {
             }
             <label className="formInput">
               <span>Name</span>
-              <input type="text" className="formInputText" ref={nameRef} />
+              <input className="formInputText" type="text" name="name" />
             </label>
             <label className="formInput">
               <span>Nick Name</span>
-              <input type="text" className="formInputText" ref={nicknameRef} />
+              <input className="formInputText" type="text" name="nickname" />
             </label>
             <label className="formInput">
               <span>Role</span>
-              <select className="formInputText" ref={roleRef}>
+              <select className="formInputText" name="role">
                 <option value="teacher">Teacher</option>
                 <option value="kid">Kid</option>
               </select>
             </label>
             <label className="formInput">
               <span>Password</span>
-              <input type="password" className="formInputText" ref={passwordRef} />
+              <input className="formInputText" type="password" name="password" />
             </label>
             <label className="formInput">
               <span>Tenant</span>
-              <select className="formInputText" ref={tenantRef}>
+              <select className="formInputText" name="tenant_id" >
                 {tenantState.tenants.map(tenant =>
                   <option value={tenant.id} key={tenant.id}>
                     {tenant.name}
@@ -162,7 +156,7 @@ const AdminUsers: React.FC = () => {
             <button className="formSubmit" disabled={waiting} onClick={submit}>
               {waiting ? 'Submitting ...' : 'Submit'}
             </button>
-          </div>
+          </form>
         </div>
       }
     </AdminLayout>

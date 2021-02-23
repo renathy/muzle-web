@@ -7,8 +7,7 @@ import { useRecoilState } from "recoil";
 const AdminTenants: React.FC = () => {
 
   const [tenantState, setTenantState] = useRecoilState(tenantAtom);
-  const nameRef = React.useRef<HTMLInputElement>(null);
-  const codeRef = React.useRef<HTMLInputElement>(null);
+  const formRef = React.useRef<HTMLFormElement>(null);
   const [waiting, setWating] = React.useState(false);
   const [submitStatus, setSubmitStatus] = React.useState({
     code: '',
@@ -18,7 +17,7 @@ const AdminTenants: React.FC = () => {
   React.useEffect(() => {
     if (!tenantState.init) {
       const load = async () => {
-        const response = await api.get('/admin/tenants');
+        const response = await api.get('api/admin/tenants');
         if (response.status === 200) {
           setTenantState({
             init: true,
@@ -31,36 +30,40 @@ const AdminTenants: React.FC = () => {
   }, [tenantState, setTenantState]);
 
   const submit = async () => {
-    setWating(true);
-    setSubmitStatus({
-      code: '',
-      messages: []
-    });
-    const response = await api.post('/admin/tenants', {
-      name: nameRef.current?.value,
-      code: codeRef.current?.value,
-    })
+    if (formRef.current) {
 
-    if (response.status === 200) {
-      setTenantState({
-        ...tenantState,
-        tenants: [
-          ...tenantState.tenants,
-          response.data.tenant
-        ]
-      });
+      setWating(true);
       setSubmitStatus({
-        code: 'success',
-        messages: ['Successfully created!']
+        code: '',
+        messages: []
       });
-    } else {
-      setSubmitStatus({
-        code: 'failed',
-        messages: Object.values(response.data.errors)
-      });
+
+      var data = new FormData(formRef.current);
+      const response = await api.post('api/admin/tenants', data);
+
+      if (response.status === 200) {
+        setTenantState({
+          ...tenantState,
+          tenants: [
+            ...tenantState.tenants,
+            response.data.tenant
+          ]
+        });
+        setSubmitStatus({
+          code: 'success',
+          messages: ['Successfully created!']
+        });
+
+        formRef.current.reset();
+      } else {
+        setSubmitStatus({
+          code: 'failed',
+          messages: Object.values(response.data.errors)
+        });
+      }
+
+      setWating(false);
     }
-
-    setWating(false);
   };
 
   return (
@@ -96,7 +99,7 @@ const AdminTenants: React.FC = () => {
           </div>
 
           {/* form */}
-          <div className="bg-white rounded-sm p-4 space-y-4 shadow1">
+          <form className="bg-white rounded-sm p-4 space-y-4 shadow1" ref={formRef}>
             {submitStatus.code === 'success' &&
               <div className="px-4 py-2 text-sm text-white bg-green-600 rounded-md">
                 {submitStatus.messages[0]}
@@ -111,16 +114,17 @@ const AdminTenants: React.FC = () => {
             }
             <label className="formInput">
               <span>Name</span>
-              <input type="text" className="formInputText" ref={nameRef} />
+              <input className="formInputText" type="text" name="name" />
             </label>
             <label className="formInput">
               <span>Code</span>
-              <input type="text" className="formInputText" ref={codeRef} />
+              <input className="formInputText" type="text" name="code" />
             </label>
             <button className="formSubmit" disabled={waiting} onClick={submit}>
               {waiting ? 'Submitting ...' : 'Submit'}
             </button>
-          </div>
+          </form>
+
         </div>
       }
     </AdminLayout>

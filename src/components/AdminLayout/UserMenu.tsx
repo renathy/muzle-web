@@ -9,7 +9,7 @@ const UserMenu: React.FC = () => {
   const ref = React.useRef(null);
 
   const logout = async () => {
-    const response = await api.post('/auth/logout');
+    const response = await api.post('api/auth/logout');
     if (response.status === 200) {
       window.location.href = '/login';
     } else {

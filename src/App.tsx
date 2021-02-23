@@ -15,7 +15,7 @@ const App: React.FC = () => {
   React.useEffect(() => {
     if (!authState.init) {
       const checkToken = async () => {
-        const response = await api.post('/auth/me');
+        const response = await api.post('api/auth/me');
 
         if (response.status === 200) {
           const user = response.data;
