@@ -121,7 +121,7 @@ const AdminCategories: React.FC = () => {
               <input className="formInputText" type="text" name="name" />
             </label>
             <label className="formInput">
-              <span>Code</span>
+              <span>Src</span>
               <input className="formInputText" type="file" name="src" />
             </label>
             <button className="formSubmit" disabled={waiting} onClick={submit}>
