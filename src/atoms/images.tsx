@@ -15,7 +15,7 @@ interface ImageState {
 }
 
 const imageAtom = atom({
-  key: 'categoryState',
+  key: 'imageState',
   default: {
     init: false,
     images: []

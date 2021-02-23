@@ -12,7 +12,7 @@ interface GameState {
 }
 
 const gameAtom = atom({
-  key: 'categoryState',
+  key: 'gameState',
   default: {
     init: false,
     games: []

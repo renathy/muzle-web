@@ -12,7 +12,7 @@ interface BackgroundState {
 }
 
 const backgroundAtom = atom({
-  key: 'categoryState',
+  key: 'backgroundState',
   default: {
     init: false,
     backgrounds: []
