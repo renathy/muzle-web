@@ -4,6 +4,8 @@ export interface Game {
   id: number;
   name: string;
   description: string;
+  backgrounds_count: number;
+  categories_count: number;
 }
 
 interface GameState {

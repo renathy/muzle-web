@@ -89,7 +89,7 @@ const AdminImages: React.FC = () => {
         <div className="space-y-4">
           {/* list */}
           <div className="bg-white rounded-sm shadow1 flex">
-            <div className="w-32 flex-shrink-0 bg-gray-50 divide-y divide-gray-200 border-r">
+            <div className="min-w-32 flex-shrink-0 bg-gray-50 divide-y divide-gray-200 border-r">
               {categoryState.categories.map(cat =>
                 <div
                   className="p-4 cursor-pointer hover:bg-gray-100 active:bg-gray-200 select-none"
