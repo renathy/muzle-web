@@ -72,13 +72,29 @@ const AdminTenants: React.FC = () => {
         :
         <div className="space-y-4">
           {/* list */}
-          <div className="bg-white rounded-sm divide-y divide-gray-300 shadow1">
-            {tenantState.tenants.map(tenant =>
-              <div className="px-4 py-2" key={tenant.id}>
-                {tenant.name}
-              </div>
-            )}
+          <div className="w-full overflow-x-auto shadow1">
+            <table className="w-full whitespace-no-wrap">
+              <thead>
+                <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
+                  <th className="px-4 py-3">Name</th>
+                  <th className="px-4 py-3">Code</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y">
+                {tenantState.tenants.map(tenant =>
+                  <tr className="text-gray-700">
+                    <td className="px-4 py-3">
+                      {tenant.name}
+                    </td>
+                    <td className="px-4 py-3">
+                      {tenant.code}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
+
           {/* form */}
           <div className="bg-white rounded-sm p-4 space-y-4 shadow1">
             {submitStatus.code === 'success' &&

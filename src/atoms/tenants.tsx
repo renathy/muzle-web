@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-interface Tenant {
+export interface Tenant {
   id: number;
   name: string;
   code: string;

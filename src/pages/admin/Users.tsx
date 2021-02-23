@@ -31,6 +31,10 @@ const AdminUsers: React.FC = () => {
             init: true,
             users: response.data.users
           });
+          setTenantState({
+            init: true,
+            tenants: response.data.tenants
+          });
         }
       };
       load();
@@ -75,20 +79,44 @@ const AdminUsers: React.FC = () => {
 
   return (
     <AdminLayout>
-      {!userState.init ?
+      {(!userState.init && !tenantState.init) ?
         <div className="bg-white rounded-sm px-4 py-2 shadow1">
           Loading ...
         </div>
         :
         <div className="space-y-4">
           {/* list */}
-          <div className="bg-white rounded-sm divide-y divide-gray-300 shadow1">
-            {userState.users.map(user =>
-              <div className="px-4 py-2" key={user.id}>
-                {user.name}
-              </div>
-            )}
+          <div className="w-full overflow-x-auto shadow1">
+            <table className="w-full whitespace-no-wrap">
+              <thead>
+                <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                  <th className="px-4 py-3">Name</th>
+                  <th className="px-4 py-3">Nickname</th>
+                  <th className="px-4 py-3">Role</th>
+                  <th className="px-4 py-3">Tenant</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y">
+                {userState.users.map(user =>
+                  <tr className="text-gray-700">
+                    <td className="px-4 py-3">
+                      {user.name}
+                    </td>
+                    <td className="px-4 py-3 text-sm">
+                      {user.nickname}
+                    </td>
+                    <td className="px-4 py-3 text-xs">
+                      {user.role}
+                    </td>
+                    <td className="px-4 py-3 text-sm">
+                      {user.tenant.name}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
+
           {/* form */}
           <div className="bg-white rounded-sm p-4 space-y-4 shadow1">
             {submitStatus.code === 'success' &&
@@ -124,19 +152,13 @@ const AdminUsers: React.FC = () => {
             </label>
             <label className="formInput">
               <span>Tenant</span>
-              {tenantState.init ?
-                <select className="formInputText" ref={tenantRef}>
-                  {tenantState.tenants.map(tenant =>
-                    <option value={tenant.id} key={tenant.id}>
-                      {tenant.name}
-                    </option>
-                  )}
-                </select>
-                :
-                <Link className="formSubmit" to="/admin/tenants">
-                  Load Tenant
-                </Link>
-              }
+              <select className="formInputText" ref={tenantRef}>
+                {tenantState.tenants.map(tenant =>
+                  <option value={tenant.id} key={tenant.id}>
+                    {tenant.name}
+                  </option>
+                )}
+              </select>
             </label>
             <button className="formSubmit" disabled={waiting} onClick={submit}>
               {waiting ? 'Submitting ...' : 'Submit'}

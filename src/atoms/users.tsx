@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { Tenant } from "./tenants";
 
 interface User {
   id: number;
@@ -6,6 +7,7 @@ interface User {
   nickname: string;
   role: string;
   tenant_id: string;
+  tenant: Tenant;
 }
 
 interface UserState {
