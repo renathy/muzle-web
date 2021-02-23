@@ -17,3 +17,7 @@
 .formSubmit {
   @apply block px-4 py-2 mt-4 text-sm text-center text-white rounded-md cursor-pointer bg-purple-600 active:bg-purple-700 focus:outline-none
 }
+
+.buttonPrimary {
+  @apply px-4 py-2 mt-4 text-sm text-center text-white rounded-md cursor-pointer bg-purple-600 active:bg-purple-700 focus:outline-none
+}

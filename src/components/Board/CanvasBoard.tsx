@@ -23,13 +23,14 @@ const CanvasBoard: React.FC = () => {
     if (canvas && background) {
       canvas.setWidth(width);
       canvas.setHeight(height);
-      fabric.Image.fromURL(background.image, (img) => {
+      const backgroundImageUrl = `${process.env.REACT_APP_SERVER}storage/${background.src}`;
+      fabric.Image.fromURL(backgroundImageUrl, (img) => {
         if (img.width && img.height) {
           const xR = width / img.width;
           const yR = height / img.height;
           const mR = Math.max(xR, yR);
           canvas.setBackgroundImage(
-            background.image,
+            backgroundImageUrl,
             canvas.renderAll.bind(canvas),
             {
               originX: "left",
@@ -50,7 +51,8 @@ const CanvasBoard: React.FC = () => {
       const y = event.clientY - (canvasOffset.top + dragItem.offsetY);
 
       if (dragItem.type === "image") {
-        fabric.Image.fromURL(dragItem.object.image, (img) => {
+        const imageUrl = `${process.env.REACT_APP_SERVER}storage/${dragItem.object.src}`;
+        fabric.Image.fromURL(imageUrl, (img) => {
           if (img.width) {
             const scale = dragItem.width / img.width;
             img.set({

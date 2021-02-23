@@ -1,26 +1,33 @@
 export interface Background {
-  key: string;
-  image: string;
-  thumb: string;
+  id: number;
+  name: string;
+  src: string;
 }
 
 export interface Image {
-  cat: string;
-  image: string;
+  id: number;
   name: string;
+  src: string;
+  category_id: number;
 }
 
 export interface Category {
+  id: number;
   name: string;
-  image: string;
+  src: string;
+  images: Image[];
+}
+
+export interface Game {
+  name: string;
+  description: string;
+  helper: string;
 }
 
 export interface GameData {
-  name: string;
-  helper: string;
+  game: Game;
   backgrounds: Background[];
   categories: Category[];
-  images: Image[];
 }
 
 export enum Nav {

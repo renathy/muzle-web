@@ -28,8 +28,16 @@ const App: React.FC = () => {
               break;
             }
           }
-          if (routeScope !== user.role) {
-            if (user.role === 'admin') {
+
+          // user role
+          let userRole = user.role;
+          if (user.role === 'kid' || user.role === 'teacher') {
+            userRole = 'user';
+          }
+
+          // match role and url
+          if (routeScope !== userRole) {
+            if (userRole === 'admin') {
               history.push("/admin");
             } else {
               history.push("/user");

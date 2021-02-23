@@ -8,9 +8,14 @@ const buttonClass = "w-1/3 h-16 p-2 flex items-center justify-center border bord
 const ImageList: React.FC = () => {
   const { state, setState } = React.useContext(Context);
   const { data } = state;
-  const { images, categories } = data;
+  const [categories, setCategories] = React.useState<Category[]>([]);
   const [category, setCategory] = React.useState<Category | null>(null);
-  const [categoryImages, setCategoryImages] = React.useState<Image[]>([]);
+
+  React.useEffect(() => {
+    if (data) {
+      setCategories(data.categories);
+    }
+  }, [data]);
 
   const dragStart = (event: any, image: Image) => {
     const imageSize = event.target.childNodes[0].getBoundingClientRect();
@@ -45,18 +50,12 @@ const ImageList: React.FC = () => {
     setCategory(null);
   };
 
-  React.useEffect(() => {
-    const filtered = images.filter((img: Image) => img.cat === category?.name);
-    setCategoryImages(filtered);
-  }, [category, images]);
-
   return (
     <div>
       {/* Top */}
       <div className="flex items-center justify-between">
         <span className="text-sm">
-          {categories.length}{" "}
-          {categoryImages.length > 0 && `/ ${categoryImages.length}`}
+          {categories.length}
         </span>
         <button
           onClick={showCategories}
@@ -75,16 +74,16 @@ const ImageList: React.FC = () => {
               onClick={() => setCategory(cat)}
               className={buttonClass}
             >
-              <img src={cat.image} alt="" className="max-w-full max-h-full" />
+              <img src={`${process.env.REACT_APP_SERVER}storage/${cat.src}`} alt="" className="max-w-full max-h-full" />
             </div>
           ))}
         </div>
       )}
 
       {/* CategoryImage list */}
-      {category && categoryImages.length > 0 && (
+      {category && (
         <div className="flex flex-wrap">
-          {categoryImages.map((img) => (
+          {category.images.map((img) => (
             <div
               draggable
               key={img.name}
@@ -93,7 +92,7 @@ const ImageList: React.FC = () => {
               className={buttonClass}
             >
               <img
-                src={img.image}
+                src={`${process.env.REACT_APP_SERVER}storage/${img.src}`}
                 alt=""
                 className="max-w-full max-h-full pointer-events-none"
               />

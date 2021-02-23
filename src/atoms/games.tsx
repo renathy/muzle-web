@@ -4,6 +4,7 @@ export interface Game {
   id: number;
   name: string;
   description: string;
+  helper: string;
   backgrounds_count: number;
   categories_count: number;
 }

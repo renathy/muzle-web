@@ -12,9 +12,15 @@ const styles = {
 const BackgroundList: React.FC = () => {
   const { state, setState } = React.useContext(Context);
   const { data, background } = state;
-  const { backgrounds } = data;
+  const [backgrounds, setBackgrounds] = React.useState<Background[]>([]);
   const [range, setRange] = React.useState(0);
   const [point, setPoint] = React.useState(0);
+
+  React.useEffect(() => {
+    if (data) {
+      setBackgrounds(data.backgrounds);
+    }
+  }, [data]);
 
   React.useEffect(() => {
     setPoint(0);
@@ -70,14 +76,14 @@ const BackgroundList: React.FC = () => {
                   handleBackgroundChange(backgrounds[point + index])
                 }
                 className={
-                  background.key === backgrounds[point + index].key
+                  background.id === backgrounds[point + index].id
                     ? "p-1 border border-gray-300"
                     : "p-1 border border-transparent hover:border-gray-500 active:border-gray-400"
                 }
               >
                 <div className="relative" style={styles.image}>
                   <img
-                    src={backgrounds[point + index].thumb}
+                    src={`${process.env.REACT_APP_SERVER}storage/${backgrounds[point + index].src}`}
                     alt=""
                     className="rounded-sm overflow-hidden absolute w-full h-full object-cover top-0 left-0"
                   />

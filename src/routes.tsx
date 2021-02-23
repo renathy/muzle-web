@@ -7,7 +7,9 @@ import AdminGames from 'pages/admin/Games';
 import AdminCategories from 'pages/admin/Categories';
 import AdminImages from 'pages/admin/Images';
 import AdminBackgrounds from 'pages/admin/Backgrounds';
-import UserWelcome from 'pages/user/Welcome';
+import UserDashboard from 'pages/user/Dashboard';
+import UserGameList from 'pages/user/GameList';
+import UserGame from 'pages/user/Game';
 
 interface Route {
   path: string;
@@ -67,9 +69,21 @@ const routes: Route[] = [
   },
   {
     path: '/user',
-    title: 'Welcome',
+    title: 'Dashboard',
     scope: 'user',
-    component: UserWelcome,
+    component: UserDashboard,
+  },
+  {
+    path: '/user/games',
+    title: 'Game LIst',
+    scope: 'user',
+    component: UserGameList,
+  },
+  {
+    path: '/user/games/:id',
+    title: 'Game',
+    scope: 'user',
+    component: UserGame,
   },
 ];
 
