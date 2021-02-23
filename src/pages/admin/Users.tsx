@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from 'react-router-dom';
 import api from "api";
 import userAtom from "atoms/users";
 import tenantAtom from "atoms/tenants";
@@ -98,7 +97,7 @@ const AdminUsers: React.FC = () => {
               </thead>
               <tbody className="bg-white divide-y">
                 {userState.users.map(user =>
-                  <tr className="text-gray-700">
+                  <tr className="text-gray-700" key={user.id}>
                     <td className="px-4 py-3">
                       {user.name}
                     </td>

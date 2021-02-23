@@ -28,7 +28,7 @@ const AdminTenants: React.FC = () => {
       };
       load();
     }
-  }, []);
+  }, [tenantState, setTenantState]);
 
   const submit = async () => {
     setWating(true);
@@ -82,7 +82,7 @@ const AdminTenants: React.FC = () => {
               </thead>
               <tbody className="bg-white divide-y">
                 {tenantState.tenants.map(tenant =>
-                  <tr className="text-gray-700">
+                  <tr className="text-gray-700" key={tenant.id}>
                     <td className="px-4 py-3">
                       {tenant.name}
                     </td>
