@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import AdminLayout from "components/AdminLayout";
 import api from "api";
 import tenantAtom from "atoms/tenants";
@@ -81,6 +82,7 @@ const AdminTenants: React.FC = () => {
                 <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                   <th className="px-4 py-3">Name</th>
                   <th className="px-4 py-3">Code</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y">
@@ -91,6 +93,11 @@ const AdminTenants: React.FC = () => {
                     </td>
                     <td className="px-4 py-3">
                       {tenant.code}
+                    </td>
+                    <td width="80">
+                      <Link to={`/admin/tenants/${tenant.id}`} className="buttonSecondary">
+                        Edit
+                      </Link>
                     </td>
                   </tr>
                 )}

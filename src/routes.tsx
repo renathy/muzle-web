@@ -2,7 +2,9 @@ import { FunctionComponent } from 'react';
 import Login from 'pages/auth/Login';
 import AdminDashboard from 'pages/admin/Dashboard';
 import AdminTenants from 'pages/admin/Tenants';
+import AdminTenantEdit from 'pages/admin/TenantEdit';
 import AdminUsers from 'pages/admin/Users';
+import AdminUserEdit from 'pages/admin/UserEdit';
 import AdminGames from 'pages/admin/Games';
 import AdminCategories from 'pages/admin/Categories';
 import AdminImages from 'pages/admin/Images';
@@ -38,10 +40,22 @@ const routes: Route[] = [
     component: AdminTenants,
   },
   {
+    path: '/admin/tenants/:id',
+    title: 'Tenant Edit',
+    scope: 'admin',
+    component: AdminTenantEdit,
+  },
+  {
     path: '/admin/users',
     title: 'Users',
     scope: 'admin',
     component: AdminUsers,
+  },
+  {
+    path: '/admin/users/:id',
+    title: 'Users',
+    scope: 'admin',
+    component: AdminUserEdit,
   },
   {
     path: '/admin/games',

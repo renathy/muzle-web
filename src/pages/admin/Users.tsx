@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import api from "api";
 import userAtom from "atoms/users";
 import tenantAtom from "atoms/tenants";
@@ -87,6 +88,7 @@ const AdminUsers: React.FC = () => {
                   <th className="px-4 py-3">Nickname</th>
                   <th className="px-4 py-3">Role</th>
                   <th className="px-4 py-3">Tenant</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y">
@@ -103,6 +105,11 @@ const AdminUsers: React.FC = () => {
                     </td>
                     <td className="px-4 py-3 text-sm">
                       {user.tenant.name}
+                    </td>
+                    <td width="80">
+                      <Link to={`/admin/users/${user.id}`} className="buttonSecondary">
+                        Edit
+                      </Link>
                     </td>
                   </tr>
                 )}

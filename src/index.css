@@ -21,3 +21,7 @@
 .buttonPrimary {
   @apply px-4 py-2 mt-4 text-sm text-center text-white rounded-md cursor-pointer bg-purple-600 active:bg-purple-700 focus:outline-none
 }
+
+.buttonSecondary {
+  @apply px-4 py-2 text-sm text-center text-gray-900 rounded-md cursor-pointer bg-gray-200 hover:bg-gray-300 active:bg-gray-200 focus:outline-none
+}
