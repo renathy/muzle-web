@@ -52,11 +52,23 @@ const App: React.FC = () => {
             });
           }, 1000);
         } else {
+
           setAuthState({
             ...authState,
             init: true,
           });
-          history.push("/login");
+
+          // verify url exist
+          let routeScope = '';
+          for (let i = 0; i < routes.length; i++) {
+            if (matchPath(location.pathname, routes[i])) {
+              routeScope = routes[i].scope;
+              break;
+            }
+          }
+          if (!routeScope) {
+            history.push("/login");
+          }
         }
 
       };
