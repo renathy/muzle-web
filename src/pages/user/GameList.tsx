@@ -13,7 +13,7 @@ const UserWelcome: React.FC = () => {
   React.useEffect(() => {
     if (!gameState.init) {
       const load = async () => {
-        const response = await api.get('api/admin/games');
+        const response = await api.get('api/user/games');
         if (response.status === 200) {
           setGameState({
             init: true,
