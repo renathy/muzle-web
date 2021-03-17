@@ -6,7 +6,7 @@ import ControlBoard from "./ControlBoard";
 import CustomScroll from "./CustomScroll";
 
 const styles = {
-  board: { width: 800, height: 600 },
+  board: { width: 900, heipht: 600 },
   control: { width: 250, height: 600 },
 };
 
@@ -35,7 +35,7 @@ const Board: React.FC<Props> = ({ data }) => {
           </div>
           <div
             style={styles.control}
-            className="flex-shrink-0 bg-gray-900 text-gray-100"
+            className="flex-shrink-0 bg-yellow-50 text-gray-800"
           >
             <CustomScroll style={styles.control}>
               <ControlBoard />

@@ -19,7 +19,7 @@ const UserLayout: React.FC = ({ children }) => {
   return (
     <div className={clsx('flex h-screen bg-gray-50 transition-transform md:transition-none transform', { 'translate-x-64': mobileMenu })}>
       <div className="flex flex-col flex-1 w-full">
-        <header className="z-10 h-16 bg-purple-600 text-white shadow1">
+        <header className="z-10 h-16 bg-yellow-900 text-white shadow1">
           <div className="container max-w-screen-lg mx-auto flex items-center h-full">
             {/* logo */}
             <Link to="/user">
@@ -28,7 +28,7 @@ const UserLayout: React.FC = ({ children }) => {
             {/* navs */}
             <div className="pl-8 space-x-2 h-full flex">
               {navList.map(nav =>
-                <Link className="h-full px-2 flex items-center hover:bg-purple-700 active:bg-purple-800" to={nav.path} key={nav.title}>
+                <Link className="h-full px-2 flex items-center hover:bg-yellow-800 active:bg-yellow-800" to={nav.path} key={nav.title}>
                   {nav.title}
                 </Link>
               )}

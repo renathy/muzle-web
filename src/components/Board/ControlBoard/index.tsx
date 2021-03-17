@@ -13,10 +13,10 @@ const Board: React.FC = () => {
 
   return (
     <div className="select-none">
-      <div className="mb-4">
+      <div className="mb-2">
         <Navigation />
       </div>
-      <div className="p-2 space-y-4">
+      <div className="p-1 space-y-2">
         {nav === Nav.Image && <ImageTab />}
         {nav === Nav.Shape && <ShapeTab />}
         {nav === Nav.Text && <TextTab />}

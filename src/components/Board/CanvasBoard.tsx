@@ -62,27 +62,57 @@ const CanvasBoard: React.FC = () => {
               scaleY: scale,
             });
             canvas.add(img).renderAll.bind(canvas);
+            canvas.setActiveObject(img);
           }
         });
       }
 
       if (dragItem.type === "line") {
-        const line = new fabric.Line([x, y, x + dragItem.width, y], {
-          stroke: dragItem.object.color,
-          strokeWidth: dragItem.height,
-          strokeUniform: true
+        console.log('drag');
+
+        const lineDefaultWidth = 65;
+        const lineDefaultHeight = 16;
+        const arrowDefaultHeight = 36;          
+        const arrowDefaultWidth = 36;      
+        
+        const rectangle = new fabric.Rect({
+          left: x,
+          top: y,
+          fill: dragItem.object.color,
+          width: lineDefaultWidth,
+          height: lineDefaultHeight,
+          originY: 'center',
+          originX: 'center'
         });
-        canvas.add(line).renderAll.bind(canvas);
+
+        const triangleLeft = lineDefaultWidth / 2 + x;        
+
+        const triangle = new fabric.Triangle({
+          width: arrowDefaultHeight,  //triangle is rotated and height becomes width         
+          height: arrowDefaultWidth, //triangle is rotated and height becomes width 
+          originX: 'center',
+          originY: 'center',
+          left: triangleLeft,
+          top: y, 
+          fill: dragItem.object.color,
+          angle: 90
+        });
+
+        const  group = new fabric.Group([rectangle, triangle]);
+
+        canvas.add(group);
+        canvas.setActiveObject(group);
       }
 
       if (dragItem.type === "circle") {
         const circle = new fabric.Circle({
           left: x,
           top: y,
-          radius: dragItem.width / 2,
+          radius: 15, //todo: use dragitem.with, but it should be circle width not wrapper
           fill: dragItem.object.color,
         });
         canvas.add(circle).renderAll.bind(canvas);
+        canvas.setActiveObject(circle);
       }
     }
   };

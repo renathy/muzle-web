@@ -27,7 +27,7 @@ const ContextProvider: React.FC<any> = ({ children }: any) => {
     nav: Nav.Image,
     background: null,
     dragItem: {},
-    width: 800,
+    width: 900,
     height: 600,
     data: null,
     showHelper: false
