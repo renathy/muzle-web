@@ -21,7 +21,7 @@ const AuthLayout: React.FC = ({ children }) => {
     <div className={clsx('flex h-screen bg-gray-50 transition-transform md:transition-none transform', { 'translate-x-64': mobileMenu })}>
 
       {/* Desktop sidemenu */}
-      <aside className="z-20 w-64 h-full overflow-y-auto bg-purple-600 text-white flex-shrink-0 absolute -left-64 md:relative md:left-0">
+      <aside className="z-20 w-64 h-full overflow-y-auto bg-yellow-900 text-white flex-shrink-0 absolute -left-64 md:relative md:left-0">
         <div className="py-4">
           <div className="flex justify-center py-6">
             <img className="w-32" src="/logo.png" alt="" />

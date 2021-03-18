@@ -128,7 +128,7 @@ const AdminTenantEdit: React.FC = () => {
 
           <div className="bg-white rounded-sm p-4 space-y-4 shadow1">
             {deleteStatus.code === 'submit' &&
-              <div className="px-4 py-2 text-sm text-white bg-purple-600 rounded-md">
+              <div className="px-4 py-2 text-sm text-white bg-purple-900 rounded-md">
                 {deleteStatus.messages[0]}
               </div>
             }

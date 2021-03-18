@@ -61,7 +61,7 @@ const Login: React.FC = () => {
         <input type="password" className="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" ref={passwordRef} />
       </label>
       <button
-        className="block w-full py-2 mt-4 text-sm text-center text-white rounded-lg cursor-pointer bg-purple-600 active:bg-purple-700 focus:outline-none"
+        className="block w-full py-2 mt-4 text-sm text-center text-white rounded-lg cursor-pointer bg-yellow-900 active:bg-purple-700 focus:outline-none"
         onClick={submit}
         disabled={checking}
       >

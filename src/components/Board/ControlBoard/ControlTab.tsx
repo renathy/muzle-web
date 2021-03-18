@@ -11,6 +11,11 @@ const ControlTab: React.FC = () => {
   const { canvas, width, height } = state;
 
   const handleDelete = () => {
+    canvas.remove(...canvas.getObjects());
+    canvas.renderAll();
+  };
+
+  const handleReset = () => {
     const objects = canvas.getActiveObjects();
     canvas.remove(...objects);
     canvas.renderAll();
