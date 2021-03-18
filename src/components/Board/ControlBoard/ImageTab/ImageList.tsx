@@ -1,5 +1,5 @@
 import React from "react";
-import { FaBackward } from "react-icons/fa";
+import { BsList } from "react-icons/bs";
 import { Category, Image } from "../../Constant";
 import { Context } from "../../ContextProvider";
 
@@ -53,21 +53,17 @@ const ImageList: React.FC = () => {
   return (
     <div>
       {/* Top */}
-      
-
-      {category && (
-        <div className="flex items-center justify-between">
-        {/* <span className="text-sm">
+      <div className="flex items-center justify-between">
+        <span className="text-sm">
           {categories.length}
-        </span> */}
+        </span>
         <button
           onClick={showCategories}
-          className="p-2 rounded-full hover:bg-yellow-100 active:opacity-80 focus:outline-none"
+          className="p-2 rounded-full hover:bg-gray-700 active:opacity-80 focus:outline-none"
         >
-          <FaBackward />
+          <BsList />
         </button>
       </div>
-      )}
 
       {/* Categories */}
       {category === null && (
@@ -78,7 +74,7 @@ const ImageList: React.FC = () => {
               onClick={() => setCategory(cat)}
               className={buttonClass}
             >
-              <img src={`${process.env.REACT_APP_SERVER}storage/${cat.src}`} alt="{}" className="max-w-full max-h-full" />
+              <img src={`${process.env.REACT_APP_SERVER}storage/${cat.src}`} alt="" className="max-w-full max-h-full" />
             </div>
           ))}
         </div>
@@ -94,11 +90,10 @@ const ImageList: React.FC = () => {
               onDragStart={(e) => dragStart(e, img)}
               onDragEnd={dragEnd}
               className={buttonClass}
-              title={img.name}
             >
               <img
                 src={`${process.env.REACT_APP_SERVER}storage/${img.src}`}
-                alt=""                
+                alt=""
                 className="max-w-full max-h-full pointer-events-none"
               />
             </div>

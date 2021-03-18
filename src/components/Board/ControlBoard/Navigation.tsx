@@ -39,7 +39,7 @@ const Navigation: React.FC = () => {
         <div
           className={
             name === state.nav
-              ? "bg-yellow-50"
+              ? "bg-gray-800"
               : "text-gray-500 hover:text-gray-300"
           }
           key={name}

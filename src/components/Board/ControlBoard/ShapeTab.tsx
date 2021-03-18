@@ -2,13 +2,13 @@ import React from "react";
 import { Context } from "../ContextProvider";
 
 const objectWrapper =
-  "w-1/2 h-16 py-2 px-2 flex items-center justify-center border border-transparent hover:border-gray-500 cursor-pointer rounded-sm";
+  "py-2 px-2 border border-transparent hover:border-gray-500 rounded-sm cursor-pointer";
 
 const ShapeTab: React.FC = () => {
   const { state, setState } = React.useContext(Context);
 
   const dragStart = (event: any, type: String, color: String) => {
-    const objectSize = event.target.getBoundingClientRect();    
+    const objectSize = event.target.childNodes[0].getBoundingClientRect();
     setState({
       ...state,
       dragItem: {
@@ -18,8 +18,8 @@ const ShapeTab: React.FC = () => {
         },
         offsetX: event.clientX - objectSize.left,
         offsetY: event.clientY - objectSize.top,
-
-        width: objectSize.width, //for circle only
+        width: objectSize.width,
+        height: objectSize.height,
       },
     });
   };
@@ -39,14 +39,14 @@ const ShapeTab: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-wrap">
+    <div className="flex items-center justify-between">
       <div
         className={objectWrapper}
         draggable
-        onDragStart={(e) => dragStart(e, "line", "#00E7FF")}
+        onDragStart={(e) => dragStart(e, "line", "#059669")}
         onDragEnd={dragEnd}
       >
-        <img src="/img/arrowblue.png" alt="" className="max-w-full max-h-full" />        
+        <div className="w-14 h-1 bg-green-600"></div>
       </div>
       <div
         className={objectWrapper}
@@ -54,15 +54,15 @@ const ShapeTab: React.FC = () => {
         onDragStart={(e) => dragStart(e, "line", "#DC2626")}
         onDragEnd={dragEnd}
       >
-        <img src="/img/arrowred.png" alt="" className="max-w-full max-h-full" />        
+        <div className="w-14 h-1 bg-red-600"></div>
       </div>
       <div
         className={objectWrapper}
         draggable
-        onDragStart={(e) => dragStart(e, "circle", "#22D3EE")}
+        onDragStart={(e) => dragStart(e, "circle", "#059669")}
         onDragEnd={dragEnd}
       >
-        <div className="w-4 h-4 rounded-full bg-indigo-200"></div>
+        <div className="w-2 h-2 rounded-full bg-green-600"></div>
       </div>
       <div
         className={objectWrapper}
@@ -70,7 +70,7 @@ const ShapeTab: React.FC = () => {
         onDragStart={(e) => dragStart(e, "circle", "#DC2626")}
         onDragEnd={dragEnd}
       >
-        <div className="w-4 h-4 rounded-full bg-red-600"></div>
+        <div className="w-2 h-2 rounded-full bg-red-600"></div>
       </div>
     </div>
   );

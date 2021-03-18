@@ -97,12 +97,12 @@ const AdminUserEdit: React.FC = () => {
           </div>
           <form className="bg-white rounded-sm p-4 space-y-4 shadow1" ref={formRef}>
             {submitStatus.code === 'submit' &&
-              <div className="px-4 py-2 text-sm text-white bg-yellow-600 rounded-md">
+              <div className="px-4 py-2 text-sm text-white bg-purple-600 rounded-md">
                 {submitStatus.messages[0]}
               </div>
             }
             {submitStatus.code === 'success' &&
-              <div className="px-4 py-2 text-sm text-white bg-yellow-600 rounded-md">
+              <div className="px-4 py-2 text-sm text-white bg-green-600 rounded-md">
                 {submitStatus.messages[0]}
               </div>
             }

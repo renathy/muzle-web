@@ -5,8 +5,6 @@ import categoryAtom, { Category } from "atoms/categories";
 import backgroundAtom, { Background } from "atoms/backgrounds";
 import { useRecoilState } from "recoil";
 import AdminLayout from "components/AdminLayout";
-import { Link } from "react-router-dom";
-
 
 const AdminGames: React.FC = () => {
 
@@ -135,11 +133,6 @@ const AdminGames: React.FC = () => {
                     </td>
                     <td className="px-4 py-3 text-sm">
                       {game.backgrounds_count}
-                    </td>
-                    <td>
-                      <Link to={`/admin/games/${game.id}/delete`} className="buttonSecondary">
-                        Archive
-                      </Link>
                     </td>
                   </tr>
                 )}
