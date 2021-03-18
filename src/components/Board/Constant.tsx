@@ -2,7 +2,6 @@ export interface Background {
   id: number;
   name: string;
   src: string;
-  thumb_src: string;
 }
 
 export interface Image {

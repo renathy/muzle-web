@@ -6,15 +6,11 @@ import api from "api";
 import routes from "./routes";
 import NoMatch from "pages/public/NoMatch";
 
-import './i18n';
-import { useTranslation, initReactI18next } from "react-i18next";
-
 const App: React.FC = () => {
 
   const location = useLocation();
   const history = useHistory();
   const [authState, setAuthState] = useRecoilState(authAtom);
-  const { t } = useTranslation();
 
   React.useEffect(() => {
     if (!authState.init) {

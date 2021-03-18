@@ -26,7 +26,7 @@ const TextTab: React.FC = () => {
       <div className="space-y-2">
         <p>Comment</p>
         <textarea
-          rows={15}
+          rows={5}
           placeholder="Leave Comment"
           className="text-gray-900 p-2 w-full resize-y rounded-md focus:outline-none focus:ring-2 focus:ring-purple-600"
         >

@@ -4,8 +4,6 @@ import api from "api";
 import "@szhsin/react-menu/dist/index.css";
 import authAtom from "atoms/auth";
 import { useRecoilValue } from "recoil";
-import { FaUser, FaSignOutAlt } from 'react-icons/fa';
-
 
 const UserMenu: React.FC = () => {
 
@@ -25,33 +23,22 @@ const UserMenu: React.FC = () => {
 
   return (
     <React.Fragment>
-      <div className="px-2 italic">
-        {authState.user?.name}
-      </div>
-      <button type="button" className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2"
+      <button
+        className="px-4 h-10 rounded-md flex items-center justify-center focus:outline-none hover:bg-purple-700 active:bg-purple-800 cursor-pointer"
         ref={ref}
         onClick={() => setOpen(true)}
-
       >
-        <FaUser />
+        {authState.user?.name}
       </button>
-     
       <ControlledMenu align="end" anchorRef={ref} isOpen={isOpen} onClose={() => setOpen(false)} >
         <MenuItem styles={{ padding: 0 }}>
           <div
-            className="w-full flex"
-            style={{ padding: '0.375rem 1.5rem' }}
-            onClick={logout}
-          >
-            <FaSignOutAlt /> Iziet
-          </div>
-          {/* <div
             className="w-full"
             style={{ padding: '0.375rem 1.5rem' }}
             onClick={logout}
           >
-            Profils
-          </div> */}
+            Logout
+          </div>
         </MenuItem>
       </ControlledMenu>
     </React.Fragment>
