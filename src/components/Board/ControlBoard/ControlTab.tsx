@@ -52,7 +52,7 @@ const ControlTab: React.FC = () => {
       <button type="button" onClick={handleReset} className={buttonClass}>
         <FaTrash />
       </button>
-    </div>
+    </div> 
   );
 };
 
