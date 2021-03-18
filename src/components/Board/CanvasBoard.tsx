@@ -85,7 +85,7 @@ const CanvasBoard: React.FC = () => {
           originX: 'center'
         });
 
-        const triangleLeft = lineDefaultWidth / 2 + x;        
+        const triangleLeft = lineDefaultWidth / 2 + x;         
 
         const triangle = new fabric.Triangle({
           width: arrowDefaultHeight,  //triangle is rotated and height becomes width         
