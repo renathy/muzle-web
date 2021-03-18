@@ -74,7 +74,7 @@ const Login: React.FC = () => {
     <AuthLayout>
       <div className="space-y-4">
         <h1 className="mb-4 text-xl text-center">
-          Ienāc sistēmā
+          Login
       </h1>
         {tenantState.init &&
           <label className="formInput">
@@ -88,11 +88,11 @@ const Login: React.FC = () => {
           </label>
         }
         <label className="block text-sm">
-          <span className="text-gray-700">Vārds</span>
+          <span className="text-gray-700">Nickname</span>
           <input type="text" className="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" ref={nicknameRef} />
         </label>
         <label className="block mt-4 text-sm">
-          <span className="text-gray-700 ">Parole</span>
+          <span className="text-gray-700 ">Password</span>
           <input type="password" className="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" ref={passwordRef} />
         </label>
         <button
@@ -100,7 +100,7 @@ const Login: React.FC = () => {
           onClick={submit}
           disabled={checking}
         >
-          {checking ? 'Pārbauda ...' : 'Ienākt'}
+          {checking ? 'Checking ...' : 'Submit'}
         </button>
       </div>
     </AuthLayout>
