@@ -1,7 +1,6 @@
 import React from "react";
 import { fabric } from "fabric";
 import { Background, Nav, GameData } from "./Constant";
-import { isNullOrUndefined } from "util";
 
 export interface BoardState {
   canvas: fabric.Canvas | null;

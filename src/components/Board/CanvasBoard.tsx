@@ -24,23 +24,29 @@ const CanvasBoard: React.FC = () => {
       canvas.setWidth(width);
       canvas.setHeight(height);
       const backgroundImageUrl = `${process.env.REACT_APP_SERVER}storage/${background.src}`;
-      fabric.Image.fromURL(backgroundImageUrl, (img) => {
-        if (img.width && img.height) {
-          const xR = width / img.width;
-          const yR = height / img.height;
-          const mR = Math.max(xR, yR);
-          canvas.setBackgroundImage(
-            backgroundImageUrl,
-            canvas.renderAll.bind(canvas),
-            {
-              originX: "left",
-              originY: "top",
-              scaleX: mR,
-              scaleY: mR,
-            }
-          );
+      fabric.Image.fromURL(
+        backgroundImageUrl,
+        (img) => {
+          if (img.width && img.height) {
+            const xR = width / img.width;
+            const yR = height / img.height;
+            const mR = Math.max(xR, yR);
+            canvas.setBackgroundImage(
+              img,
+              canvas.renderAll.bind(canvas),
+              {
+                originX: "left",
+                originY: "top",
+                scaleX: mR,
+                scaleY: mR,
+              }
+            );
+          }
+        },
+        {
+          crossOrigin: 'Anonymous'
         }
-      });
+      );
     }
   }, [canvas, width, height, background]);
 
@@ -52,19 +58,24 @@ const CanvasBoard: React.FC = () => {
 
       if (dragItem.type === "image") {
         const imageUrl = `${process.env.REACT_APP_SERVER}storage/${dragItem.object.src}`;
-        fabric.Image.fromURL(imageUrl, (img) => {
-          if (img.width) {
-            const scale = dragItem.width / img.width;
-            img.set({
-              left: x,
-              top: y,
-              scaleX: scale,
-              scaleY: scale,
-            });
-            canvas.add(img).renderAll.bind(canvas);
-            canvas.setActiveObject(img);
+        fabric.Image.fromURL(
+          imageUrl,
+          (img) => {
+            if (img.width) {
+              const scale = dragItem.width / img.width;
+              img.set({
+                left: x,
+                top: y,
+                scaleX: scale,
+                scaleY: scale,
+              });
+              canvas.add(img).renderAll.bind(canvas);
+            }
+          },
+          {
+            crossOrigin: 'Anonymous'
           }
-        });
+        );
       }
 
       if (dragItem.type === "line") {
@@ -120,12 +131,12 @@ const CanvasBoard: React.FC = () => {
   return (
     <div
       onDrop={(event) => handleDrop(event)}
-      className="relative"
+      className="relative w-full h-full"
     >
       <canvas id="canvas" />
       {state.showHelper &&
-        <div className="absolute top-0 left-0 w-full h-full p-2 flex items-center justify-center">
-          <img src={state.data.helper} alt="" className="max-w-full max-h-full rounded-md overflow-hidden" />
+        <div className="absolute top-0 left-0 p-2 w-full h-full">
+          <img src={`${process.env.REACT_APP_SERVER}storage/${state.data.game.helper}`} alt="" className="w-full h-full object-contain" />
         </div>
       }
     </div>
